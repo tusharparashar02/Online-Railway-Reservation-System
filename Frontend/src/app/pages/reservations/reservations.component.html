@@ -1,0 +1,55 @@
+<div class="max-w-4xl mx-auto p-6 ">
+  <h1 class="text-2xl font-bold text-center text-indigo-700 mb-6 mt-20">🚆 Train Reservation</h1>
+
+  <!-- Travel Info -->
+  <select [(ngModel)]="travelClass" class="w-full border px-4 py-2 rounded">
+    <option value="">-- Select Class --</option>
+    <option value="Sleeper">Sleeper</option>
+    <option value="AC">AC</option>
+    <option value="First Class">First Class</option>
+  </select>
+
+  <div class="mb-4">
+    <label class="block font-semibold mb-1">Travel Date</label>
+    <input [(ngModel)]="travelDate" type="date" class="w-full border px-4 py-2 rounded" />
+  </div>
+
+  <!-- Passenger List -->
+  <h2 class="text-lg font-semibold text-gray-800 mb-2">👥 Passenger Details</h2>
+  <div *ngFor="let p of passengers; let i = index" class="mb-4 border rounded p-4 bg-gray-50">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <input [(ngModel)]="p.name" class="border px-3 py-2 rounded w-full" placeholder="Name" />
+      <!-- 🎯 Gender Dropdown -->
+    <select [(ngModel)]="p.gender" class="border px-3 py-2 rounded w-full">
+      <option value="" disabled selected>Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+
+      <input [(ngModel)]="p.age" type="number" class="border px-3 py-2 rounded w-full" placeholder="Age" />
+      <input [(ngModel)]="p.address" class="border px-3 py-2 rounded w-full" placeholder="Address" />
+    </div>
+    <button *ngIf="passengers.length > 1" (click)="removePassenger(i)" class="mt-2 text-red-500 underline">
+      Remove Passenger
+    </button>
+  </div>
+  <button (click)="addPassenger()" class="mb-6 bg-gray-200 text-black px-4 py-2 rounded hover:bg-gray-300">
+    ➕ Add Passenger
+  </button>
+
+  <!-- Payment Info -->
+  <h2 class="text-lg font-semibold text-gray-800 mb-2">💳 Payment Details</h2>
+  <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <input [(ngModel)]="payment.creditCardNumber" class="border px-3 py-2 rounded w-full" placeholder="Credit Card Number" />
+    <input [(ngModel)]="payment.bankName" class="border px-3 py-2 rounded w-full" placeholder="Bank Name" />
+   <!-- <input [(ngModel)]="payment.amountPaid" type="number" class="border px-3 py-2 rounded w-full" placeholder="Amount Paid" /> -->
+  </div>
+
+  <!-- Submit -->
+  <div class="text-center">
+    <button (click)="submitReservation()" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">
+      ✅ Confirm Reservation
+    </button>
+  </div>
+</div>
